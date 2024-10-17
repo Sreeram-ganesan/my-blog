@@ -10,7 +10,7 @@ list all contacts, and delete existing contact.
 Open the directory with newly created project and run:
 
 ```shell 
-go build -o my-blog
+go build -o my-blog main.go
 ```
 it will result in building executable file "my-blog" (feel free to name it differently).
 
