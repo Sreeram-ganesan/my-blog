@@ -88,9 +88,9 @@ Let's take a look inside (for database-specific setting):
 database:
   host: 127.0.0.1
   port: 5432
-  name: addrbook
-  user: _
-  password: _
+  name: myblog
+  user: postgres
+  password: admin
   sslmode: disable
   # Connect timeout is seconds
   connect_timeout: 10
@@ -106,7 +106,7 @@ variables, such as:
 
 ```shell
 export MYBLOG_DATABASE_USER=postgres
-export MYBLOG_DATABASE_PASSWORD=mypassword
+export MYBLOG_DATABASE_PASSWORD=admin
 ```
 
 or pass it via settings if you run your code in IDE. For instance, in IntelliJ IDEA you can
@@ -123,7 +123,7 @@ password that can later be used to configure.
 Another option is to create a docker image with PostgreSQL database running:
 
 ```shell
-docker run --name localpostgres -d -p 5432:5432 -e POSTGRES_DATABASE=addbook -e POSTGRES_PASSWORD=mypassword postgres:alpine
+docker run --name localpostgres -d -p 5432:5432 -e POSTGRES_DATABASE=myblog -e POSTGRES_PASSWORD=admin postgres:alpine
 ```
 
 This will create and run a local instance of PostgreSQL database with user name "postgres" and password "postgrespass".
@@ -345,3 +345,15 @@ web app files to HTTP server.
 
 Now in your browser go to http://localhost:8080/ and it should open your React web
 application.
+
+
+To Run postgres locally on 5432:
+```shell
+  docker run -d --name my-postgres -e POSTGRES_PASSWORD=admin -p 5432:5432 postgres
+```
+To Run redis locally on 
+To Run this app as a docker image locally exposed in 8080:
+
+```shell
+  docker build -t my-blog . && docker run -p 8080:8080 -d my-blog
+```

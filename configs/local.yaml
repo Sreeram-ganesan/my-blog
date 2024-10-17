@@ -9,11 +9,11 @@ credentials:
 database:
   connect_timeout: 10
   host: 127.0.0.1
-  name: addrbook
-  password: _
+  name: myblog
+  password: admin
   port: 5432
   sslmode: disable
-  user: _
+  user: postgres
 server:
   addr: 127.0.0.1
   port: 8080
