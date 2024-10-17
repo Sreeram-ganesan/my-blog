@@ -1,0 +1,19 @@
+cache:
+  redis:
+    addr: 127.0.0.1:6379
+    db: 0
+  type: redis
+credentials:
+  key: _
+  secret: _
+database:
+  connect_timeout: 10
+  host: 127.0.0.1
+  name: addrbook
+  password: _
+  port: 5432
+  sslmode: disable
+  user: _
+server:
+  addr: 127.0.0.1
+  port: 8080
