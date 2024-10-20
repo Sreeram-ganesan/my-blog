@@ -18,5 +18,9 @@ func wirePersistPorts(
 		cache,
 	)
 	di.UseCases.AddrBook = addrBook
+	di.UseCases.BlogBook = persist.NewBlogBookAdapter(
+		pers,
+		cache,
+	)
 	return pers.Close
 }

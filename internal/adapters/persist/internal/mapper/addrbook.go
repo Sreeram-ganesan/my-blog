@@ -2,6 +2,7 @@ package mapper
 
 import (
 	"fmt"
+
 	"github.com/Sreeram-ganesan/my-blog/internal/adapters/persist/internal/repo"
 	"github.com/Sreeram-ganesan/my-blog/internal/core/model"
 
@@ -24,6 +25,15 @@ func ContactEntityToModel(e *repo.ContactWithPhonesEntity) *model.Contact {
 	}
 }
 
+func BlogEntityToModel(e *repo.BlogEntity) *model.Blog {
+	return &model.Blog{
+		ID:      RepoIdToModelId(e.ID),
+		Title:   e.Title,
+		Content: e.Content,
+		Author:  e.Author,
+	}
+}
+
 func ContactToSaveModelToEntity(m *model.ContactToSave) *repo.ContactWithPhonesEntity {
 	return &repo.ContactWithPhonesEntity{
 		FirstName: m.FirstName,
@@ -34,6 +44,14 @@ func ContactToSaveModelToEntity(m *model.ContactToSave) *repo.ContactWithPhonesE
 				PhoneNumber: item.PhoneNumber,
 			}
 		}),
+	}
+}
+
+func BlogToSaveModelToEntity(m *model.BlogToSave) *repo.BlogEntity {
+	return &repo.BlogEntity{
+		Title:   m.Title,
+		Content: m.Content,
+		Author:  m.Author,
 	}
 }
 

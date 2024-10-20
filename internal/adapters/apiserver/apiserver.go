@@ -3,11 +3,12 @@ package apiserver
 import (
 	"context"
 	"fmt"
+
+	"github.com/Sreeram-ganesan/my-blog/internal/adapters/apiserver/internal"
+	"github.com/Sreeram-ganesan/my-blog/internal/core/di"
 	"github.com/gin-contrib/static"
 	"github.com/gin-gonic/gin"
 	"go.uber.org/zap"
-	"github.com/Sreeram-ganesan/my-blog/internal/adapters/apiserver/internal"
-	"github.com/Sreeram-ganesan/my-blog/internal/core/di"
 )
 
 func Start(_ context.Context, di *di.DI) {
@@ -48,4 +49,5 @@ func apiRoute(r *gin.Engine, di *di.DI) {
 		PUT("/:id", internal.UpdateContact(di.UseCases)).
 		GET("/:id", internal.GetContact(di.UseCases)).
 		DELETE("/:id", internal.DeleteContact(di.UseCases))
+	r.Group("/api/blogs").POST("", internal.CreateBlog(di.UseCases))
 }

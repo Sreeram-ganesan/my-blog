@@ -2,15 +2,16 @@ package cmd
 
 import (
 	"fmt"
+	"os"
+
 	"github.com/spf13/cobra"
 	"github.com/spf13/pflag"
 	"github.com/spf13/viper"
-	"os"
 )
 
 var rootCmd = newCobraCmdlineCommand(
-	"apiserver", // TODO replace to your application name
-	"My new server",
+	"myblogserver", // TODO replace to your application name
+	"My new server for my blog",
 	"My new server built from GoQuick template",
 )
 

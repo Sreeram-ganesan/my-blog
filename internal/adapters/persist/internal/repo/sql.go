@@ -53,3 +53,16 @@ SET first_name = :firstName,
     last_name = :lastName
 WHERE id = :contactId
 `
+
+const insertBlogSql =
+/*language=sql*/ `
+INSERT INTO blogs(title, author, content)
+VALUES (:title, :author, :content)
+RETURNING id
+`
+const selectBlogByIdSql =
+/*language=sql*/ `
+SELECT id, title, author, content
+FROM blogs
+WHERE id = :id
+`

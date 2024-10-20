@@ -123,7 +123,7 @@ password that can later be used to configure.
 Another option is to create a docker image with PostgreSQL database running:
 
 ```shell
-docker run --name localpostgres -d -p 5432:5432 -e POSTGRES_DATABASE=myblog -e POSTGRES_PASSWORD=admin postgres:alpine
+docker run -d -p 5432:5432 -e POSTGRES_DB=myblog -e POSTGRES_PASSWORD=admin postgres:latest
 ```
 
 This will create and run a local instance of PostgreSQL database with user name "postgres" and password "postgrespass".
@@ -145,7 +145,7 @@ file contains address and port for local instance. You can test generated app by
 instance:
 
 ```shell
-docker run --name some-redis -p 6379:6379 -d redis
+  docker run --name some-redis -p 6379:6379 -d redis
 ```
 
 Now when you run API server and try Address Book API requests, it will be using redis instance to set,

@@ -37,4 +37,5 @@ COPY --from=build /go/src/app/web/dist /app/web/dist
 
 EXPOSE 8080
 
-ENTRYPOINT /app/my-blog run --deployment=local
+# CMD ["/app/my-blog run --deployment=/app/configs/local"]
+ENTRYPOINT ./my-blog run --deployment=local

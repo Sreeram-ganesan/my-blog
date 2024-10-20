@@ -3,13 +3,14 @@ package persist
 import (
 	"context"
 	"fmt"
-	"github.com/samber/lo"
+
 	"github.com/Sreeram-ganesan/my-blog/internal/adapters/persist/internal/cache"
 	"github.com/Sreeram-ganesan/my-blog/internal/adapters/persist/internal/mapper"
 	"github.com/Sreeram-ganesan/my-blog/internal/adapters/persist/internal/repo"
 	"github.com/Sreeram-ganesan/my-blog/internal/core/app"
 	"github.com/Sreeram-ganesan/my-blog/internal/core/model"
 	"github.com/Sreeram-ganesan/my-blog/internal/core/outport"
+	"github.com/samber/lo"
 )
 
 type addrBookAdapter struct {
@@ -24,6 +25,14 @@ func NewAddrBookAdapter(
 	return &addrBookAdapter{
 		repo:             repo.NewAddrBookRepo(p.DB()),
 		contactByIdCache: cache.RegisterContactByID(c),
+	}
+}
+func NewBlogBookAdapter(
+	p outport.Persistence,
+	c outport.Cache,
+) outport.BlogBook {
+	return &blogBookAdapter{
+		repo: repo.NewBlogBookRepo(p.DB()),
 	}
 }
 

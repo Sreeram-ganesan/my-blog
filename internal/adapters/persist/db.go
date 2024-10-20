@@ -3,11 +3,12 @@ package persist
 import (
 	"context"
 	"fmt"
+
+	"github.com/Sreeram-ganesan/my-blog/internal/core/app"
+	"github.com/Sreeram-ganesan/my-blog/internal/core/outport"
 	"github.com/jmoiron/sqlx"
 	_ "github.com/lib/pq"
 	"go.uber.org/zap"
-	"github.com/Sreeram-ganesan/my-blog/internal/core/app"
-	"github.com/Sreeram-ganesan/my-blog/internal/core/outport"
 )
 
 const createTablesSql =
@@ -22,7 +23,13 @@ CREATE TABLE IF NOT EXISTS phones(
     type TEXT NOT NULL,
     phone_number TEXT NOT NULL,
     contact_id BIGINT NOT NULL REFERENCES contacts(id)
-)
+);
+CREATE TABLE IF NOT EXISTS blogs(
+	id BIGSERIAL PRIMARY KEY,
+	title TEXT NOT NULL,
+	author TEXT NOT NULL,
+	content TEXT NOT NULL
+);
 `
 
 type dbAdapter struct {

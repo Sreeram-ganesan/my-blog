@@ -3,8 +3,9 @@ package internal
 import (
 	"errors"
 	"fmt"
-	"github.com/samber/lo"
+
 	"github.com/Sreeram-ganesan/my-blog/internal/core/model"
+	"github.com/samber/lo"
 )
 
 type ContactToSaveRest struct {
@@ -23,6 +24,13 @@ type ContactRest struct {
 	FirstName string      `json:"first_name"`
 	LastName  string      `json:"last_name"`
 	Phones    []PhoneRest `json:"phones"`
+}
+
+type BlogRest struct {
+	ID      string `json:"id"`
+	Title   string `json:"title"`
+	Content string `json:"content"`
+	Author  string `json:"author"`
 }
 
 func (r *ContactToSaveRest) toModel() (*model.ContactToSave, error) {
@@ -44,6 +52,23 @@ func (r *ContactToSaveRest) toModel() (*model.ContactToSave, error) {
 		FirstName: r.FirstName,
 		LastName:  r.LastName,
 		Phones:    phones,
+	}, nil
+}
+
+func (r *BlogToSaveRest) toModel() (*model.BlogToSave, error) {
+	if r.Title == "" {
+		return nil, errors.New("title must not be empty")
+	}
+	if r.Content == "" {
+		return nil, errors.New("content must not be empty")
+	}
+	if r.Author == "" {
+		return nil, errors.New("author must not be empty")
+	}
+	return &model.BlogToSave{
+		Title:   r.Title,
+		Content: r.Content,
+		Author:  r.Author,
 	}, nil
 }
 
@@ -100,8 +125,22 @@ func contactModelToRest(m *model.Contact) *ContactRest {
 	}
 }
 
+func blogModelToRest(m *model.Blog) *BlogRest {
+	return &BlogRest{
+		ID:      m.ID,
+		Title:   m.Title,
+		Content: m.Content,
+	}
+}
+
 type VersionRest struct {
 	Service string `json:"service"`
 	Version string `json:"version"`
 	Build   string `json:"build"`
+}
+
+type BlogToSaveRest struct {
+	Title   string `json:"title"`
+	Content string `json:"content"`
+	Author  string `json:"author"`
 }

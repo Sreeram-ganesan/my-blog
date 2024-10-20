@@ -1,9 +1,10 @@
 package internal
 
 import (
-	"github.com/gin-gonic/gin"
 	"net/http"
+
 	"github.com/Sreeram-ganesan/my-blog/internal/core/usecase"
+	"github.com/gin-gonic/gin"
 )
 
 func CreateContact(uc *usecase.UseCases) func(c *gin.Context) {
@@ -100,5 +101,27 @@ func DeleteContact(uc *usecase.UseCases) func(c *gin.Context) {
 			return
 		}
 		c.Status(http.StatusNoContent)
+	}
+}
+
+func CreateBlog(uc *usecase.UseCases) func(c *gin.Context) {
+	return func(c *gin.Context) {
+		req := new(BlogToSaveRest)
+		if err := c.ShouldBindJSON(req); err != nil {
+			c.JSON(http.StatusBadRequest, NewBadRequestErrResponse(err))
+			return
+		}
+		blogToSave, err := req.toModel()
+		if err != nil {
+			c.JSON(http.StatusBadRequest, NewBadRequestErrResponse(err))
+			return
+		}
+		blog, err := uc.AddBlog(c.Request.Context(), blogToSave)
+		if err != nil {
+			c.JSON(http.StatusInternalServerError, NewInternalServerErrResponse(err))
+			return
+		}
+		blogRest := blogModelToRest(blog)
+		c.JSON(http.StatusCreated, blogRest)
 	}
 }

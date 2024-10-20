@@ -1,6 +1,7 @@
 cache:
   redis:
-    addr: 127.0.0.1:6379
+    addr: redis:6379
+    # addr: 127.0.0.1:6379  # Use this line if you are not using docker-compose
     db: 0
   type: redis
 credentials:
@@ -8,12 +9,13 @@ credentials:
   secret: _
 database:
   connect_timeout: 10
-  host: 127.0.0.1
+  # host: 127.0.0.1  # Use this line if you are not using docker-compose
+  host: postgres
   name: myblog
   password: admin
   port: 5432
   sslmode: disable
   user: postgres
 server:
-  addr: 127.0.0.1
+  addr: 0.0.0.0
   port: 8080
